@@ -3,32 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B6E3E6"
-    android:padding="16dp">
+    android:background="@drawable/background_color">
 
-    <!-- Toolbar with custom styling -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/black"
         android:elevation="4dp"
-        android:backgroundTint="@color/black"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
 
-        <!-- Custom toolbar title style -->
         <TextView
-            android:id="@+id/toolbarTitle"
+            android:id="@+id/toolbarAdditionalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/bubblegum_sans"
             android:text="Candidate Details"
+            android:textSize="45sp"
+            android:fontFamily="@font/bubblegum_sans"
             android:textColor="@android:color/white"
-            android:textSize="48sp" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- ImageView to display the candidate's image -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="300dp"
@@ -36,9 +36,9 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/toolbar"
         android:src="@drawable/recruitlogo"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop" />
 
-    <!-- TextView to display the candidate's name -->
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
@@ -47,10 +47,10 @@
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
         android:text="Candidate Name"
         android:textColor="#000000" />
 
-    <!-- TextView to display the candidate's description -->
     <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
@@ -61,19 +61,20 @@
         android:fontFamily="@font/comic_neue_bold_italic"
         android:text="Candidate Description"
         android:textColor="#000000"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <!-- LinearLayout to contain the Connect Now and Message buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewDescription"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal"
         android:paddingTop="16dp">
 
-        <!-- Connect Now button -->
         <Button
             android:id="@+id/btnConnectNow"
             android:layout_width="wrap_content"
@@ -83,7 +84,6 @@
             android:textSize="20dp"
             android:backgroundTint="@color/black" />
 
-        <!-- Message button -->
         <Button
             android:id="@+id/btnMessage"
             android:layout_width="wrap_content"
