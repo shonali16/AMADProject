@@ -11,56 +11,52 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 
-class RegisterActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private var authentic: FirebaseAuth? = null
     private lateinit var btnRegis: Button
     private lateinit var btnLogin: Button
     private var email: EditText? = null
     private var password: EditText? = null
-    private var cPassword: EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_login)
         authentic = FirebaseAuth.getInstance()
         btnRegis = findViewById(R.id.btnRegister)
         btnLogin = findViewById(R.id.btnLogin)
         email = findViewById(R.id.loginEmail)
         password = findViewById(R.id.loginPassword)
-        cPassword = findViewById(R.id.loginCPassword)
-        btnRegis.setOnClickListener {
+        btnLogin.setOnClickListener {
             inputValidation()
         }
-        btnLogin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+        btnRegis.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
+
+
     }
+
     private fun inputValidation() {
         if(email!!.text.toString().trim()==""){
-            Toast.makeText(this@RegisterActivity,"Email required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@LoginActivity,"Email required", Toast.LENGTH_SHORT).show()
             return
         }
-
         if(password!!.text.toString().trim()==""){
-            Toast.makeText(this@RegisterActivity,"Password required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@LoginActivity,"Password required", Toast.LENGTH_SHORT).show()
             return
         }
-        if(cPassword!!.text.toString().trim()==""){
-            Toast.makeText(this@RegisterActivity,"Confirm Password required", Toast.LENGTH_SHORT).show()
-            return
-        }
-        DoRegister(email!!.text.toString().trim(),password!!.text.toString().trim())
+        DoLogin(email!!.text.toString().trim(),password!!.text.toString().trim())
     }
 
-    private fun DoRegister(trim: String, trim1: String) {
-        authentic?.createUserWithEmailAndPassword(trim,trim1)
-            ?.addOnCompleteListener(this@RegisterActivity) { task: Task<AuthResult?> ->
+    private fun DoLogin(trim: String, trim1: String) {
+        authentic?.signInWithEmailAndPassword(trim,trim1)
+            ?.addOnCompleteListener(this@LoginActivity) { task: Task<AuthResult?> ->
                 if (task.isSuccessful) {
-                    startActivity(Intent(this@RegisterActivity, CandidateActivity::class.java))
+                    startActivity(Intent(this@LoginActivity, CandidateActivity::class.java))
                 } else {
-                    Toast.makeText(this@RegisterActivity, task.exception?.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, task.exception?.message,Toast.LENGTH_SHORT).show()
                 }
             }?.addOnFailureListener {
-                Toast.makeText(this,it.message.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,it.message.toString(),Toast.LENGTH_SHORT).show()
             }
     }
 }
